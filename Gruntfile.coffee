@@ -1,13 +1,13 @@
 module.exports = (grunt) ->
   grunt.initConfig
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON 'package.json'
 
     jshint:
       all: ['js/**/*.js']
 
     concat:
       options:
-        separator: '\n'
+        separator: ';'
       app:
         src: ['src/**/*.js']
         dest: 'build/js/<%= pkg.name %>.js'
