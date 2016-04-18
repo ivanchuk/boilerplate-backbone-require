@@ -1,6 +1,8 @@
 module.exports = (grunt) ->
+  pkg = grunt.file.readJSON 'package.json'
+
   grunt.initConfig
-    pkg: grunt.file.readJSON 'package.json'
+    pkg: pkg
 
     jshint:
       all: ['js/**/*.js']
@@ -19,12 +21,14 @@ module.exports = (grunt) ->
           'build/js/underscore-min.js': 'libs/underscore/underscore-min.js'
           'build/js/backbone-min.js': 'libs/backbone/backbone-min.js'
           'build/js/require.js': 'libs/requirejs/require.js'
-      index:
+          'build/js/pageslider.js': 'libs/PageSlider/pageslider.js'
+          'build/css/pageslider.css': 'libs/PageSlider/css/pageslider.css'
+      tmpl:
         files:
           'build/index.html': 'src/index.html'
         options:
           process: (content, srcpath) ->
-            content.replace '{{packageName}}', 'app.min'
+            content.replace '{{packageName}}', pkg.name
 
     uglify:
       options:
@@ -37,6 +41,9 @@ module.exports = (grunt) ->
       app:
         files: ['src/**/*.js']
         tasks: ['jshint', 'concat:app', 'uglify:app']
+      tmpl:
+        files: ['src/**/*.html']
+        tasks: ['copy:tmpl']
 
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-concat'

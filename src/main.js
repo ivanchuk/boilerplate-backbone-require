@@ -18,8 +18,8 @@ require.config({
 });
 
 require(['application'], function(Application) {
-  var app;
   console.debug('main', 'application starts');
 
-  app = window.app = new Application();
+  var app = new Application();
+//  app.go('home');
 });
