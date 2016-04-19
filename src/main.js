@@ -4,7 +4,8 @@ require.config({
   paths: {
     backbone: 'backbone-min',
     underscore: 'underscore-min',
-    jquery: 'jquery.min'
+    jquery: 'jquery.min',
+    tmpl: '../assets/html'
   },
   shim: {
     backbone: {
@@ -13,13 +14,14 @@ require.config({
     },
     underscore: {
       exports: '_'
+    },
+    pageslider: {
+      exports: 'PageSlider'
     }
   }
 });
 
 require(['application'], function(Application) {
   console.debug('main', 'application starts');
-
-  var app = new Application();
-//  app.go('home');
+  window.app = new Application();
 });

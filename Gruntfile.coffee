@@ -17,18 +17,24 @@ module.exports = (grunt) ->
     copy:
       vendor:
         files:
-          'build/js/jquery.min.js': 'libs/jquery-dist/jquery.min.js'
+          'build/js/jquery.min.js':     'libs/jquery-dist/jquery.min.js'
           'build/js/underscore-min.js': 'libs/underscore/underscore-min.js'
-          'build/js/backbone-min.js': 'libs/backbone/backbone-min.js'
-          'build/js/require.js': 'libs/requirejs/require.js'
-          'build/js/pageslider.js': 'libs/PageSlider/pageslider.js'
-          'build/css/pageslider.css': 'libs/PageSlider/css/pageslider.css'
-      tmpl:
+          'build/js/backbone-min.js':   'libs/backbone/backbone-min.js'
+          'build/js/require.js':        'libs/requirejs/require.js'
+          'build/js/text.js':           'libs/text/text.js'
+          'build/js/pageslider.js':     'libs/PageSlider/pageslider.js'
+          'build/assets/css/pageslider.css':   'libs/PageSlider/css/pageslider.css'
+      index:
         files:
           'build/index.html': 'src/index.html'
         options:
           process: (content, srcpath) ->
             content.replace '{{packageName}}', pkg.name
+      assets:
+        expand: true
+        cwd: 'src'
+        src: 'assets/**/*'
+        dest: 'build/'
 
     uglify:
       options:
@@ -43,7 +49,7 @@ module.exports = (grunt) ->
         tasks: ['jshint', 'concat:app', 'uglify:app']
       tmpl:
         files: ['src/**/*.html']
-        tasks: ['copy:tmpl']
+        tasks: ['copy:assets', 'copy:index']
 
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-concat'
@@ -51,4 +57,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['concat', 'uglify', 'copy', 'watch']
+  grunt.registerTask 'default', ['concat', 'copy', 'uglify', 'watch']
