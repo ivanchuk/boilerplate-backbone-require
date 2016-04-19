@@ -12,4 +12,4 @@ $ grunt
 
 Open `build/index.html` with an express server.
 
-Based on [ccoenraets/PageSlider](https://github.com/ccoenraets/PageSlider).
+Thanks to [ccoenraets/PageSlider](https://github.com/ccoenraets/PageSlider).
