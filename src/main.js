@@ -23,5 +23,8 @@ require.config({
 
 require(['application'], function(Application) {
   console.debug('main', 'application starts');
-  window.app = new Application();
+  new Application();
+
+  // NOTE use only in development development
+//  window.app = new Application();
 });
